@@ -1,116 +1,93 @@
-# 🧩 graviton-sdet-lab
+🧩 graviton-sdet-lab
 
-A **Linux-based test automation framework** inspired by Amazon SDE/SDET validation tools.  
-It performs system health checks for **CPU, Network, and Storage**, runs in **parallel**,  
-generates **HTML & coverage reports**, and supports **Docker + CI/CD**.
+A Linux-based test automation framework (pytest) for CPU, Network, and Storage validation. Runs in parallel, generates HTML & coverage reports, supports Docker and GitHub Actions CI.
 
----
+🚀 Features
 
-## 🚀 Features
-- **CPU & OS probes:** `/proc`, `lscpu`, `/etc/os-release`
-- **Network probes:** ICMP `ping`, HTTP latency (with YAML thresholds)
-- **Storage probe:** read/write throughput verification
-- **Suite markers:** `@pytest.mark.sanity` (fast) / `@pytest.mark.regression` (deep)
-- **Config file:** `config.yaml` for latency/throughput thresholds
-- **Parallel execution:** via `pytest-xdist`
-- **HTML reporting + coverage:** via `pytest-html` and `pytest-cov`
-- **Dockerized:** reproducible Linux environment
-- **CI/CD Ready:** GitHub Actions workflow for automated testing & artifact upload
+CPU/OS probes: /proc, lscpu, /etc/os-release
 
----
+Network probes: ICMP ping, HTTP latency (YAML thresholds)
 
-## 📁 Project Structure
-graviton-sdet-lab/
-│
-├── src/
-│ ├── framework/ # (future config/util extensions)
-│ ├── sysprobe/ # CPU / OS data collection
-│ ├── netprobe/ # Network ping + HTTP latency
-│ ├── storageprobe/ # Disk I/O checks
-│ └── orchestrator/ # CLI entry point
-│
-├── tests/ # pytest suites
-├── config.yaml # thresholds for latency / throughput
-├── Dockerfile # containerized environment
-├── requirements.txt # dependencies
-└── .github/workflows/ci.yml # CI pipeline
+Storage probe: read/write throughput verification
 
-yaml
-Copy code
+Suite markers: sanity (fast) / regression (deep)
 
----
+Config-driven: config.yaml for latency/throughput limits
 
-## ⚙️ Installation (Linux / WSL2)
-```bash
+Parallel runs: pytest-xdist
+
+HTML & coverage: pytest-html, pytest-cov
+
+Dockerized + CI-ready
+
+⚙️ Installation (Linux / WSL2)
 git clone https://github.com/<your-username>/graviton-sdet-lab.git
 cd graviton-sdet-lab
 python3 -m venv .venv && source .venv/bin/activate
 pip install -U pip -r requirements.txt
+
 🧪 Running Tests
-Sanity suite (fast):
 
-bash
-Copy code
+Sanity (fast):
+
 python -m src.orchestrator.cli --suite sanity -n 2 --html sanity.html
-Regression suite (deeper):
 
-bash
-Copy code
+
+Regression (deeper):
+
 python -m src.orchestrator.cli --suite regression -n 2 --html regression.html
-HTML reports are saved in artifacts/ → open with:
 
-bash
-Copy code
+
+Open the HTML report (on Windows):
+
 explorer.exe artifacts/sanity.html
-🧱 Docker Usage
-Build & Run container:
 
-bash
-Copy code
+🧱 Docker Usage
+
+Build & run:
+
 docker build -t graviton-sdet-lab .
 docker run --rm -v "$(pwd)/artifacts":/app/artifacts graviton-sdet-lab
-This runs the sanity suite inside a clean Linux container
-and mounts reports back to your host at artifacts/sanity.html.
+
+
+This runs the sanity suite inside a clean Linux container and writes the report to artifacts/sanity.html.
 
 ⚙️ CI/CD (GitHub Actions)
-The workflow .github/workflows/ci.yml automatically:
+
+Workflow: .github/workflows/ci.yml
 
 Installs dependencies
 
 Runs pytest -m sanity
 
-Uploads HTML and coverage reports as artifacts
+Uploads HTML & coverage artifacts
 
-Badge example (replace with your username):
+Badge (replace with your username):
 
-markdown
-Copy code
 ![Tests](https://github.com/<your-username>/graviton-sdet-lab/actions/workflows/ci.yml/badge.svg)
 
-## 🧭 Architecture Overview
-
-```mermaid
+🧭 Architecture Overview
 graph TD
-    A[CLI Orchestrator<br>src/orchestrator/cli.py] --> B[Pytest Runner]
+    A[CLI Orchestrator<br/>src/orchestrator/cli.py] --> B[Pytest Runner]
     B -->|Sanity / Regression| C[System Probes]
     C -->|CPU| D[sysprobe/cpu.py]
     C -->|Network| E[netprobe/ping.py & http_probe.py]
     C -->|Storage| F[storageprobe/io_probe.py]
     B --> G[Reports]
     G -->|HTML + Coverage| H[artifacts/report.html]
-    H --> I[GitHub Actions<br>Artifact Upload]
+    H --> I[GitHub Actions<br/>Artifact Upload]
 
 🧠 Why It Matters
 
-Demonstrates framework design, test layering, and CI/CD integration
+Demonstrates framework design, test layering, and CI/CD
 
-Reflects Linux + automation experience relevant to Amazon SDE/SDET roles
+Shows Linux + automation experience aligned with Amazon SDE/SDET
 
-Extensible — thresholds, config-driven execution, Docker reproducibility
+Extensible via config + thresholds; reproducible with Docker
 
 🛠️ Tech Stack
 
-Python | pytest | PyYAML | Docker | GitHub Actions | Linux (WSL2)
+Python · pytest · PyYAML · Docker · GitHub Actions · Linux (WSL2)
 
 @contact
 Suleiman Khasheboun

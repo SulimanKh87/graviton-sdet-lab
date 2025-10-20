@@ -1,0 +1,13 @@
+network:
+  hosts:
+    - 8.8.8.8
+    - 1.1.1.1
+  http_urls:
+    - https://www.amazon.com
+    - https://www.google.com
+  latency_threshold_ms: 1000
+
+storage:
+  min_write_MBps: 5
+  min_read_MBps: 5
+

@@ -1,5 +1,68 @@
+# -----------------------------
+# Python & Virtual Environment
+# -----------------------------
 .venv/
+env/
+venv/
 __pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# -----------------------------
+# pytest & Coverage
+# -----------------------------
 .pytest_cache/
+.coverage
+htmlcov/
 artifacts/
 report.html
+*.log
+
+# -----------------------------
+# Build / Distribution
+# -----------------------------
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# -----------------------------
+# IDE / Editor Files
+# -----------------------------
+.idea/
+.vscode/
+*.iml
+
+# -----------------------------
+# OS & System Files
+# -----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -----------------------------
+# Docker
+# -----------------------------
+*.tar
+*.pid
+*.lock
+docker-compose.override.yml
+
+# -----------------------------
+# GitHub Actions / Reports
+# -----------------------------
+*.tmp
+*.bak
+*.swp
+.cache/
+__snapshots__/
+
+# -----------------------------
+# Config & Secrets
+# -----------------------------
+*.env
+config.local.yaml
+.env.*

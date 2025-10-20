@@ -1,0 +1,18 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -U pip pytest pytest-html pytest-cov pytest-xdist requests psutil
+      - run: mkdir -p artifacts
+      - run: python -m pytest -m sanity --html=artifacts/report.html --self-contained-html --cov=src
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pytest-report
+          path: artifacts/

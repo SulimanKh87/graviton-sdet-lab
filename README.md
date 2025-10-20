@@ -66,7 +66,9 @@ Badge (replace with your username):
 
 ![Tests](https://github.com/<your-username>/graviton-sdet-lab/actions/workflows/ci.yml/badge.svg)
 
-🧭 Architecture Overview
+## 🧭 Architecture Overview
+
+```mermaid
 graph TD
     A[CLI Orchestrator<br/>src/orchestrator/cli.py] --> B[Pytest Runner]
     B -->|Sanity / Regression| C[System Probes]
@@ -76,7 +78,7 @@ graph TD
     B --> G[Reports]
     G -->|HTML + Coverage| H[artifacts/report.html]
     H --> I[GitHub Actions<br/>Artifact Upload]
-
+```
 🧠 Why It Matters
 
 Demonstrates framework design, test layering, and CI/CD
